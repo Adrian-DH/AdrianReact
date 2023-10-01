@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Banner from './components/Banner.jsx';
 import CourseList from './components/CourseList.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 const schedule = {
   "title": "CS Courses for 2018-2019",
