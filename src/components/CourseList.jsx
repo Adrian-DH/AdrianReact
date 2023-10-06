@@ -3,10 +3,11 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Container from 'react-bootstrap/Container';
 import './CourseList.css';
 
-const CourseList = ({courses}) =>{
-    console.log(courses);
-    
-    const arr = Object.entries(courses).map(([id, course]) => (
+const CourseList = ({courses}, {currTerm}) =>{
+  
+    const Courses = Object.entries(courses).filter(([id, course]) => courses['term'] === currTerm);
+    console.log(Courses)
+        const arr = Courses.map(([id, course]) => (
         <div key={id} className="course-card">
         <Card  bg="Light" border="secondary" style={{ width: '18rem' }}>
         <Card.Body>
