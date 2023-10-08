@@ -1,10 +1,11 @@
-.course-card {
-    width: 18rem; 
+.courselist{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 14rem);
     margin-bottom: 20px; 
     display: flex; 
     flex-wrap: wrap;
     margin: 10px;
     justify-content: space-between; 
-  }
+}
   
   

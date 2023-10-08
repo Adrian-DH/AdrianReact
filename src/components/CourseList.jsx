@@ -1,31 +1,17 @@
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import Container from 'react-bootstrap/Container';
+import Course from "./Course";
 import './CourseList.css';
 
-const CourseList = ({courses}, {currTerm}) =>{
-  
-    const Courses = Object.entries(courses).filter(([id, course]) => courses['term'] === currTerm);
-    console.log(Courses)
-        const arr = Courses.map(([id, course]) => (
-        <div key={id} className="course-card">
-        <Card  bg="Light" border="secondary" style={{ width: '18rem' }}>
-        <Card.Body>
-          <Card.Title>{course.term} CS {course.number}</Card.Title>
-          <Card.Text>
-          {course.title}
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small>{course.meets}</small>
-        </Card.Footer>
-        </Card>
-        </div>
-    ));
+const CourseList = ({courses, currTerm, selected, toggleSelected} ) =>{
+
+    const Courses = Object.entries(courses).filter((course) => courses['term'] === currTerm); 
     return (
-        <Container>
-        <CardGroup> {arr}</CardGroup> 
-        </Container>
+    <div className="courselist">
+      {Courses.map(([id, course]) => (
+          <Course key={id}  id = {id} course={course} selected={selected} toggleSelected={toggleSelected}/>
+      ))}
+      </div>
     );
 };
 export default CourseList;

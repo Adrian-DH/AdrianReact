@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Banner from './components/Banner.jsx';
-import CourseList from './components/CourseList.jsx';
+import SelectedCourses from './components/SelectedCourses.jsx';
+import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -29,12 +30,13 @@ const Main = () => {
   if (!data) return <h1>No user data found</h1>;
 
   
-  return (<div>
-
+  return (
+  <div>
   <Banner title = {data.title}></Banner>
-  <MenuPage selection = {currTerm} setSelection = {setCurrTerm}/>
-  <CourseList courses= {data.courses} currTerm = {currTerm}></CourseList>
-    </div>)
+  <MenuPage selection = {currTerm} setSelection = {setCurrTerm} />
+  <SelectedCourses courses= {data.courses} currTerm = {currTerm}></SelectedCourses>  
+  </div>
+  );
   
 }
 

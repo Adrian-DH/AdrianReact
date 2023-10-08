@@ -1,0 +1,14 @@
+.course-card .selected {
+    background-color:lemonchiffon;
+    color: green;
+  }
+
+  .course-card {
+    width: 18rem; 
+    margin-bottom: 20px; 
+    display: flex; 
+    margin: 10px;
+    display: grid;
+  grid-template-columns: repeat(auto-fill, 14rem);
+  }
+
