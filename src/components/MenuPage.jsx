@@ -26,7 +26,6 @@ const Menu = ({selection}) => (
 );
 
 const MenuPage = ({selection, setSelection}) => {
-  console.log(selection);
   return (
     <div>
       <MenuSelector selection={selection} setSelection={setSelection} />

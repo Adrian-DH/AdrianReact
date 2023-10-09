@@ -3,9 +3,9 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import './Course.css';
 const Course= ({ id, course, selected, toggleSelected}) =>{
     return (
-    <div key = {id} className="course-card" onClick={() => toggleSelected(id)}>
-    <Card  bg="Light" border="secondary" style={{ width: '18rem' }}>
-    <div className={`card-body ${selected.includes(id) ? 'selected' : ''}`}>
+    <div key = {id} className="course-card" onClick={() => toggleSelected(course)}>
+    <Card  bg="Light" border="secondary" style={{ width: '18em'}}>
+    <div className={`card-body ${selected.includes(course) ? 'selected' : ''}`}>
     <Card.Body >
       <Card.Title>{course.term} CS {course.number}</Card.Title>
       <Card.Text>
