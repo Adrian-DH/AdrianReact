@@ -7,8 +7,8 @@ import './App.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import MenuPage from './components/MenuPage.jsx';
 import { useQuery } from '@tanstack/react-query';
-
-const choices = ['Fall', 'Winter', 'Spring'];
+import Modal from './components/Modal';
+import Cart from './components/Cart';
 
 const fetchJson = async (url) => {
   const response = await fetch(url);
@@ -25,15 +25,22 @@ const Main = () => {
   const [currTerm, setCurrTerm] = useState("Fall");
   const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
   
+  const [open, setOpen] = useState(false);
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
   if (isLoading) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;
-
+  
   
   return (
   <div>
   <Banner title = {data.title}></Banner>
   <MenuPage selection = {currTerm} setSelection = {setCurrTerm} />
+  <button className="btn btn-outline-dark" onClick={openModal}><i className="bi bi-cart4"></i></button>
+      <Modal open={open} close={closeModal}>
+        <Cart selected={selected} />
+      </Modal>
   <SelectedCourses courses= {data.courses} currTerm = {currTerm}></SelectedCourses>  
   </div>
   );
