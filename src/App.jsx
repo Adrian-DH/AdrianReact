@@ -29,14 +29,31 @@ const Main = () => {
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
   const [selected, setSelected] = useState([]);
+  const [Unselectable, setSelectable] = useState([]);
 
   
 
   const toggleSelected = (course) => setSelected(
-    selected.includes(course)
-    ? selected.filter((x) => x !== course)
+    selected.includes(course) && !Unselectable.includes(course)
+    ? selected.filter((x) => x !== course) 
     : [...selected, course]
   );
+  const UnselectableHandler =(course, action) =>{
+    let res = CompatibleClasses();
+    if (1){
+      null;
+    }
+  }
+  const toggleSelected1 = (course) => {
+    if (selected.includes(course)){
+      setSelected(selected.filter((x) => x !== course));
+      UnselectableHandler(course, remove);
+    }
+    else if (!selected.includes(course) && !Unselectable.includes(course)){
+      setSelected([...selected, course]);
+      UnselectableHandler(course, add);
+    }
+  }
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
   if (isLoading) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;
@@ -54,7 +71,7 @@ const Main = () => {
         <Cart selected={selected} />
       </Modal>
       </div>
-      <CourseList courses={data.courses} selected={selected} toggleSelected={toggleSelected} currTerm={currTerm} /> 
+      <CourseList courses={data.courses} selected={selected} Unselectable={Unselectable} toggleSelected={toggleSelected} currTerm={currTerm} /> 
   </div>
   );
   
