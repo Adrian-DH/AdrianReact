@@ -9,6 +9,7 @@ import MenuPage from './components/MenuPage.jsx';
 import { useQuery } from '@tanstack/react-query';
 import Modal from './components/Modal';
 import Cart from './components/Cart';
+import { CompatibleClasses } from './utils/comp.js';
 
 const fetchJson = async (url) => {
   const response = await fetch(url);
@@ -33,27 +34,11 @@ const Main = () => {
 
   
 
-  const toggleSelected = (course) => setSelected(
-    selected.includes(course) && !Unselectable.includes(course)
-    ? selected.filter((x) => x !== course) 
-    : [...selected, course]
-  );
-  const UnselectableHandler =(course, action) =>{
-    let res = CompatibleClasses();
-    if (1){
-      null;
-    }
-  }
-  const toggleSelected1 = (course) => {
-    if (selected.includes(course)){
-      setSelected(selected.filter((x) => x !== course));
-      UnselectableHandler(course, remove);
-    }
-    else if (!selected.includes(course) && !Unselectable.includes(course)){
-      setSelected([...selected, course]);
-      UnselectableHandler(course, add);
-    }
-  }
+  const toggleSelected = (course) => {
+    if(!CompatibleClasses(course,selected)){
+      setSelected(selected.includes(course) ? selected.filter((x) => x !== course) : [...selected, course]);
+    }}
+   
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
   if (isLoading) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;

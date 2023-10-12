@@ -2,6 +2,10 @@
     background-color:lemonchiffon;
     color: green;
   }
+  .course-card .notComp {
+    background-color:rgb(238, 182, 161);
+    color: red;
+  }
 
   .course-card {
     width: 18rem; 
