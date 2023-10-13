@@ -1,7 +1,9 @@
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import './Course.css';
 import { CompatibleClasses } from '../utils/comp';
+import { Link } from 'react-router-dom';
+import Posts from './Posts';
+import { Button } from 'react-bootstrap';
 const Course= ({ id, course, selected, toggleSelected}) =>{
     const redHighlight = CompatibleClasses(course, selected);
     return (
@@ -19,7 +21,11 @@ const Course= ({ id, course, selected, toggleSelected}) =>{
       <small>{course.meets}</small>
     </Card.Footer>
     </div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , marginBottom: '5px'}}>
+    <Link to="./Posts"><Button>Edit</Button></Link>
+    </div>
     </Card>
+    
    </div>
  );
 

@@ -1,0 +1,16 @@
+nav {
+    background-color: black;
+    font-size: 18pt;
+    font-family: Arial;
+    margin-bottom: 1em;
+    border-radius: 10px;
+  }
+  nav a {
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+  }
+  
+  nav a.active {
+    color: rgb(119, 251, 114);
+  }
