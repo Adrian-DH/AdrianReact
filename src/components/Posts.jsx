@@ -5,33 +5,48 @@ import Card from 'react-bootstrap/Card';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+
 const Posts = ({data}) => {
-    const [update, result] = useState("");
-    const [state, change] = useState("");
+    const [formData, setFormData] = useState("");
+    const [titleError, setTitleError] = useState('');
+    const [meetsError, setMeetError] = useState('');
     const submit = (evt) => {
-    evt.preventDefault();
-    if (!state.errors) {
-      update(state.values);
-    }
+      evt.preventDefault();
   };
-  const InputField = ({name, text, state, change}) => (
+  const handleInputError = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    (name === 'title' && value.length < 2) ? setTitleError('Title must be at least 2 characters long') : setTitleError("");
+    (name === 'meets' && !/\b(?:M|Tu|W|Th|F)+(?:-(?:M|Tu|W|Th|F)+)?\s+\d{2}:\d{2}-\d{2}:\d{2}\b/.test(value)) ? setMeetError('Meeting times must be formatted "MWF 12:00-13:20".') : setMeetError("");
+ };
+
+  const InputField = ({name, text}) => (
     <div className="mb-3">
-      <label htmlFor={name} className="form-label">{text}</label>
-      <input className="form-control" id={name} name={name} 
-        defaultValue={state.values?.[name]} onChange={change} />
-      <div className="invalid-feedback">{state.errors?.[name]}</div>
-    </div>
+    <label htmlFor={name} className="form-label">
+      {text}
+    </label>
+    <input
+      className={`form-control `}
+      id={name}
+      name={name}
+      value={formData[name]}
+      onChange={handleInputError}
+    />
+    
+  </div>
   ); 
-const ButtonBar = () => {
+ 
+
+  const ButtonBar = () => {
     const navigate = useNavigate();
     return (
       <div className="d-flex">
         <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate(-1)}>Cancel</button>
         <button type="submit" className="btn btn-primary me-auto" >Submit</button>
-        
       </div>
     );
   };
+  
     return(
 
     <div className="container">
@@ -42,12 +57,12 @@ const ButtonBar = () => {
     </Link>
     </Card>
     
-    <form onSubmit={submit} noValidate className={state.errors ? 'was-validated' : null}>
-      <InputField name="firstName" text="Course Term" state={state} change={change} />
-      <InputField name="lastName" text="Course Number" state={state} change={change} />
-      <InputField name="email" text="Course Title" state={state} change={change} />
-      <InputField name="description" text="Course Description" state={state} change={change} />
-      <InputField name="meets" text="Course Meets" state={state} change={change} />
+    <form onSubmit={submit} noValidate >
+      <InputField name="term" text="Course Term" />
+      <InputField name="number" text="Course Number"    />
+      <InputField name="title"  text="Course Title"  />
+      <InputField  name="description" text="Course Description"   />
+      <InputField name="meets"   text="Course Meets"  />
       <ButtonBar  />
    
   
