@@ -4,6 +4,12 @@ import { CompatibleClasses } from '../utils/comp';
 import { Link } from 'react-router-dom';
 import Posts from './Posts';
 import { Button } from 'react-bootstrap';
+
+const getCourse = (courseInfo) => {
+  const term = courseInfo.term.charAt(0);
+  const number = courseInfo.number;
+  return `${term}${number}`;
+};
 const Course= ({ id, course, selected, toggleSelected}) =>{
     const redHighlight = CompatibleClasses(course, selected);
     return (
@@ -22,7 +28,7 @@ const Course= ({ id, course, selected, toggleSelected}) =>{
     </Card.Footer>
     </div>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , marginBottom: '5px'}}>
-    <Link to="./Posts"><Button>Edit</Button></Link>
+    <Link to={`/course/${id}/edit`}><Button>Edit</Button></Link>
     </div>
     </Card>
     
