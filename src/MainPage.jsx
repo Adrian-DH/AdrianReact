@@ -7,7 +7,8 @@ import MenuPage from './components/MenuPage.jsx';
 import Modal from './components/Modal';
 import Cart from './components/Cart';
 import { CompatibleClasses } from './utils/comp.js';
-
+import Navigation from './components/Navigation.jsx';
+import { Nav } from 'react-bootstrap';
 
 
 const Main = ({data}) => {
@@ -30,6 +31,7 @@ const Main = ({data}) => {
   return (
   <div>
   <div className="top-row">
+  <Navigation/>
   <Banner title = {data.title}></Banner>
   <MenuPage selection = {currTerm} setSelection = {setCurrTerm} />
   <button className="btn btn-outline-dark" onClick={openModal}><i className="bi bi-cart4">Cart</i></button>

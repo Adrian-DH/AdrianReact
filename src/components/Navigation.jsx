@@ -1,13 +1,23 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-import './Navigation.css';
 
-const activation = ({isActive}) => isActive ? 'active' : 'inactive';
+import { signInWithGoogle, signOut, useAuthState } from '../utils/firebase';
+
+const SignInButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signInWithGoogle}>Sign in</button>
+);
+
+const SignOutButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signOut}>Sign out</button>
+);
+
+const AuthButton = () => {
+  const [user] = useAuthState();
+  return user ? <SignOutButton /> : <SignInButton />;
+};
 
 const Navigation = () => (
-  <nav>
-    <Link to="/" >Home</Link>
-    <Link to="/Posts" >Post</Link>
+  <nav className="d-flex">
+    <AuthButton />
   </nav>
 );
+
 export default Navigation;
