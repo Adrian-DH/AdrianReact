@@ -2,7 +2,6 @@ import './Cart.css';
 import Card from 'react-bootstrap/Card';
 
 const Cart = ({selected}) => {
-    console.log(selected.title);
     return (
   <div className="cart">
     {
