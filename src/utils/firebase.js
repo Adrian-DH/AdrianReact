@@ -1,8 +1,8 @@
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import {  connectAuthEmulator, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import { useCallback, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 
-import { getDatabase, onValue, ref, update } from "firebase/database";
+import { getDatabase, connectDatabaseEmulator, onValue, ref, update } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyDtmwLqwYANvHlvcWxbjRIt2x4Qii9AmAk",
@@ -65,3 +65,15 @@ export const useDbUpdate = (path) => {
 
   return [updateData, result];
 };
+
+if (!globalThis.EMULATION && import.meta.env.MODE === 'development') {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+signInWithCredential(auth, GoogleAuthProvider.credential(
+  '{"sub": "qEvli4msW0eDz5mSVO6j3W7i8w1k", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+));
+
+// set flag to avoid connecting twice, e.g., because of an editor hot-reload
+globalThis.EMULATION = true;
+}
