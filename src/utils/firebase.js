@@ -1,4 +1,4 @@
-import {  connectAuthEmulator, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import {  connectAuthEmulator, getAuth, GoogleAuthProvider, signInWithCredential, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import { useCallback, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 
@@ -18,6 +18,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
+const auth = getAuth(firebase);
 export const useDbData = (path) => {
   const [data, setData] = useState();
   const [error, setError] = useState(null);
